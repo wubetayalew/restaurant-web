@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu</title>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <!-- styles -->
+    <link rel="stylesheet" href="/public/css/styles.css" type="text/css" />
+
+</head>
+
+<body>
+    <section class="menu">
+        <!--title-->
+        <div class="title">
+            <h2>Add Food </h2>
+            <div class="underline"></div>
+        </div>
+        <!--filter buttons-->
+        <div class="btn-container">
+            <a href="index"><button class="filter-btn" type="button" data-id="all">MENU FOODS</button></a>
+            <button class="filter-btn" type="button" data-id="breakfast">ADD FOOD</button>
+            <!-- <button class="filter-btn" type="button" data-id="lunch">lunch</button>
+            <button class="filter-btn" type="button" data-id="shakes">shakes</button> -->
+        </div>
+        <!--menu items-->
+        <div class="section-center">
+
+
+        </div>
+
+    </section>
+    <div class="section-center">
+
+
+    </div>
+    <div class="formContainer">
+        <form action="" method="post">
+            <label for="name">Enter Menu name</label><br>
+            <input type="text" placeholder="Food name" name="food"><br><br>
+
+            <label for="name">Enter Menu Restaurant</label><br>
+            <input type="text" placeholder="Restaurant name" name="restaurant"><br><br>
+            <label for="price">Enter Price</label><br>
+            <input type="number" id="price" name="price" placeholder="Food price"><br>
+            <label for="pass">Enter description</label><br>
+            <textarea name="description" id="" cols="40" rows="10"></textarea> <br>
+            <input type="submit" value="submit">
+        </form>
+    </div>
+
+
+</body>
+
+</html>

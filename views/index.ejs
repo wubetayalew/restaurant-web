@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu</title>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <!-- styles -->
+    <link rel="stylesheet" href="/public/css/styles.css" type="text/css" />
+</head>
+
+<body>
+
+    <section class="menu">
+        <!--title-->
+        <div class="title">
+            <h2>Restaurant menu </h2>
+            <div class="underline"></div>
+        </div>
+        <!--filter buttons-->
+        <div class="btn-container">
+            <button class="filter-btn" type="button" data-id="all">MENU FOODS</button>
+            <a href="addFood"><button class="filter-btn" type="button" data-id="breakfast">ADD FOOD</button></a>
+            <!-- <button class="filter-btn" type="button" data-id="lunch">lunch</button>
+            <button class="filter-btn" type="button" data-id="shakes">shakes</button> -->
+        </div>
+        <!--menu items-->
+        <% for (let index = 0; index < foods.length ; index++) {%>
+            <div class="section-center" style="margin-left: 25%;
+            margin-bottom: 3%;">
+                <!--single item-->
+                <article class="menu-item">
+                    <img src="/public/images/menu-item.jpeg" class="photo" alt="menu -item" />
+                    <div class="item-info">
+                        <header>
+                            <h4>buttermilk pancakes</h4>
+                            <h4 class="price">$15</h4>
+
+                        </header>
+                        <p class="item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam animi odit quaerat consequuntur incidunt at culpa quas repellat, officiis voluptatem!</p>
+
+                    </div>
+                </article>
+                <!--end of single item-->
+
+            </div>
+            <% } %>
+
+    </section>
+
+
+</body>
+
+</html>
