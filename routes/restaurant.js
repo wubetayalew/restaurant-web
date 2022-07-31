@@ -17,14 +17,24 @@ route.get('/', async function(req, res) {
     // restaurantService.saveMenu("Mikas Burger", "bbbbbbbbbb", 220.0, "Cheese burger");
     // restaurantService.saveMenu("Mikas Burger", "cccccccccc", 220.0, "Cheese burger");
     // restaurantService.getMenu("Mikas Burger", "bbbbbbbbbb")
-    res.send('ypu are on restaurant page')
+    res.send('you can do this')
         // const mountainsRef = ref(storage, 'food6.jpg');
         // console.log('you are okay')
 
 })
 route.get('/addFood', function(req, res) {
-    res.render('addFood')
+    res.render('addmenu')
 })
+route.get('/orders', function(req, res) {
+    res.render('orders')
+})
+route.get('/users', function(req, res) {
+    res.render('users')
+})
+route.get('/reserve', function(req, res) {
+    res.render('reserve')
+})
+
 route.get('/index', function(req, res) {
     var foods = restaurantService.getAllMenu()
     res.render('index', {
@@ -32,12 +42,12 @@ route.get('/index', function(req, res) {
     })
 })
 route.post('/addFood', async function(req, res) {
-    var foodMenu = req.body.food;
-    var price = parseInt(req.body.price);
+    var foodMenu = req.body.foodname;
+    var price = req.body.price;
     var description = req.body.description;
     var restaurant = req.body.restaurant;
     restaurantService.saveMenu(restaurant, foodMenu, price, description)
-    res.redirect('index')
+    res.redirect('reserve')
 })
 route.get('/abc', async function(req, res) {
     var foods = restaurantService.getMenu("Mikas Burger", "pasta")

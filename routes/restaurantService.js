@@ -8,7 +8,7 @@ async function createRestaurant(restaurant_name, restaurant_location, restaurant
     }, { merge: true })
 }
 async function saveMenu(restaurant_name, food_name, food_price, food_description) {
-    const menuRef = db.collection('restaurant').doc(restaurant_name).collection('menu').doc(food_name);
+    const menuRef = db.collection('restaurant').doc("restaurant_name").collection('menu').doc(food_name);
     await menuRef.set({
         ['menu_name']: food_name,
         ['price']: food_price,
