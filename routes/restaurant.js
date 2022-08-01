@@ -45,8 +45,8 @@ route.post('/addFood', async function(req, res) {
     var foodMenu = req.body.foodname;
     var price = req.body.price;
     var description = req.body.description;
-    var restaurant = req.body.restaurant;
-    restaurantService.saveMenu(restaurant, foodMenu, price, description)
+    var restaurant_name = req.body.restaurant_name;
+    restaurantService.saveMenu(restaurant_name, foodMenu, price, description)
     res.redirect('reserve')
 })
 route.get('/abc', async function(req, res) {
