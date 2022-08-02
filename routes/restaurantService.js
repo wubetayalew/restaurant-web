@@ -10,11 +10,11 @@ async function createRestaurant(restaurant_name, restaurant_location, restaurant
 async function saveMenu(restaurant_name, food_name, food_price, food_description) {
     const menuRef = db.collection(restaurant_name).doc('menu').collection('foods').doc(food_name);
     await menuRef.set({
-        ['menu_name']: food_name,
-        ['price']: food_price,
-        ['description']: food_description
-    }, { merge: true })
-    // db.collection('restaurant').doc(restaurant_name).collection('menu').doc('Burger').delete();
+            ['menu_name']: food_name,
+            ['price']: food_price,
+            ['description']: food_description
+        }, { merge: true })
+        // db.collection('restaurant').doc(restaurant_name).collection('menu').doc('Burger').delete();
     console.log('you are okey!')
 }
 async function deleteMenu(restaurant_name, food_name) {

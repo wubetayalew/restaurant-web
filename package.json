@@ -8,6 +8,7 @@
   "author": "wubet ayalew",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^6.3.0",
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
