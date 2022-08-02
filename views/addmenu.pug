@@ -141,7 +141,7 @@ aside#left-panel.left-panel
             .card-header
               strong Add Menu
             .card-body.card-block
-              form.form-horizontal(action="", method="post")
+              form.form-horizontal(action="", method="post",enctype='multipart/form-data')
                 .row.form-group.
                   
                   
@@ -149,37 +149,36 @@ aside#left-panel.left-panel
                   .col.col-md-3
                     label.form-control-label(for="foodname") Food Title
                   .col-12.col-md-9
-                    input#text-input.form-control(type="text", name="foodname", placeholder="Text")
+                    input#text-input.form-control(type="text", name="foodname", placeholder="Text" required)
                 .row.form-group
                   .col.col-md-3
                     label.form-control-label(for="selectSm") Type
                   .col-12.col-md-9
                     select#selectSm.form-control-sm.form-control(name="selectSm")
-                      option(value="0") Please select
-                      option(value="1") Fasting
-                      option(value="2") Normal
-                      option(value="3") Drinks
-                      option(value="4") Traditional
-                .row.form-group
+                      option(value="Normal") Please select
+                      option(value="Fasting") Fasting
+                      option(value="Normal") Normal
+                      option(value="Drinks") Drinks
+                      option(value="Traditional") Traditional
                   .col.col-md-3
                     label.form-control-label(for="description") Description
                   .col-12.col-md-9
-                    textarea#textarea-input.form-control(name="description", rows="9", placeholder="Content...")
+                    textarea#textarea-input.form-control(name="description", rows="9", placeholder="Content..." required)
                 .row.form-group
                   .col.col-md-3
                     label.form-control-label(for="price") Price
                   .col-12.col-md-9
-                    input#text-input.form-control(type="text", name="price", placeholder="Text")
+                    input#text-input.form-control(type="text", name="price", placeholder="Text" required)
                 .row.form-group
                   .col.col-md-3
                     label.form-control-label(for="restaurant_name") Restaurant
                   .col-12.col-md-9
-                    input#text-input.form-control(type="text", name="restaurant_name", placeholder="Text")
+                    input#text-input.form-control(type="text", name="restaurant_name", placeholder="Text" required)
                 .row.form-group
                   .col.col-md-3
-                    label.form-control-label(for="file-input") File input
+                    label.form-control-label(for="file-input" ) Image
                   .col-12.col-md-9
-                    input#file-input.form-control-file(type="file", name="file-input")
+                    input#image.form-control-file(type="file", name="image" required)
                 .card-footer
                   button.btn.btn-primary.btn-sm(type="submit")
                     i.fa.fa-dot-circle-o
