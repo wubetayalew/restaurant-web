@@ -9,7 +9,7 @@ const testRouter = require('./routes/test')
 const app = express()
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
-app.listen(1234, function() {
+app.listen(8500, function() {
     console.log('server started')
 })
 app.set('views', path.join(__dirname, 'views'));

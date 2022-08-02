@@ -4,6 +4,13 @@ const { storage, ref } = require('../storage.js')
 const route = express.Router()
 const restaurantService = require('./restaurantService')
     // const { db } = require('../firebase.js')
+const { db, uploadImage } = require('../firebase')
+const multer = require('multer');
+
+const Multer = multer({
+    storage: multer.memoryStorage(),
+    limits: 1024 * 1024,
+});
 
 
 route.get('/', async function(req, res) {
@@ -41,12 +48,19 @@ route.get('/index', function(req, res) {
         foods: foods
     })
 })
-route.post('/addFood', async function(req, res) {
+route.post('/addFood', Multer.single('image'), uploadImage, async function(req, res) {
     var foodMenu = req.body.foodname;
     var price = req.body.price;
     var description = req.body.description;
     var restaurant_name = req.body.restaurant_name;
-    restaurantService.saveMenu(restaurant_name, foodMenu, price, description)
+    var type = req.body.selectSm;
+    if (type == 'Drinks') {
+        restaurantService.saveDrink(restaurant_name, foodMenu, price, description, req.file.firebaseUrl)
+    } else {
+        restaurantService.saveMenu(restaurant_name, foodMenu, price, description, req.file.firebaseUrl, type)
+    }
+
+
     res.redirect('reserve')
 })
 route.get('/abc', async function(req, res) {

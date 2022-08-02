@@ -9,7 +9,7 @@ const Multer = multer({
 });
 
 route.post('/', Multer.single('image'), uploadImage, async function(req, res) {
-    var s = req.file.firebaseUrl
+    var s = req.file
     console.log(s);
     res.send('you are on the test page');
     console.log('you are on the test page');
