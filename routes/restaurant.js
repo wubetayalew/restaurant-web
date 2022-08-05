@@ -1,10 +1,8 @@
 const express = require('express')
-const { storage, ref } = require('../storage.js')
 
 const route = express.Router()
-const restaurantService = require('./restaurantService')
-    // const { db } = require('../firebase.js')
-const { db, uploadImage } = require('../firebase')
+const restaurantService = require('../model/restaurantService')
+const { db, uploadImage } = require('../config/firebase')
 const multer = require('multer');
 
 const Multer = multer({
@@ -14,19 +12,7 @@ const Multer = multer({
 
 
 route.get('/', async function(req, res) {
-    // restaurantService.createRestaurant("Mikas Burger", "Have a nice time", "Gerji")
-    // restaurantService.saveMenu("Mikas Burger", "Burger", 220.0, "Cheese burger");
-    // restaurantService.saveMenu("Mikas Burger", "qqqqqqqqqq", 220.0, "Cheese burger");
-    // restaurantService.deleteMenu("Mikas Burger", "qqqqqqqqqq")
-
-
-    // restaurantService.saveMenu("Mikas Burger", "aaaaaaaaaa", 220.0, "Cheese burger");
-    // restaurantService.saveMenu("Mikas Burger", "bbbbbbbbbb", 220.0, "Cheese burger");
-    // restaurantService.saveMenu("Mikas Burger", "cccccccccc", 220.0, "Cheese burger");
-    // restaurantService.getMenu("Mikas Burger", "bbbbbbbbbb")
     res.send('you can do this')
-        // const mountainsRef = ref(storage, 'food6.jpg');
-        // console.log('you are okay')
 
 })
 route.get('/addFood', function(req, res) {
@@ -35,18 +21,12 @@ route.get('/addFood', function(req, res) {
 route.get('/orders', function(req, res) {
     res.render('orders')
 })
-route.get('/users', function(req, res) {
-    res.render('users')
-})
 route.get('/reserve', function(req, res) {
     res.render('reserve')
 })
 
 route.get('/index', function(req, res) {
-    var foods = restaurantService.getAllMenu()
-    res.render('index', {
-        foods: foods
-    })
+    res.render('index')
 })
 route.post('/addFood', Multer.single('image'), uploadImage, async function(req, res) {
     var foodMenu = req.body.foodname;
@@ -54,6 +34,7 @@ route.post('/addFood', Multer.single('image'), uploadImage, async function(req, 
     var description = req.body.description;
     var restaurant_name = req.body.restaurant_name;
     var type = req.body.selectSm;
+    console.log(restaurant_name);
     if (type == 'Drinks') {
         restaurantService.saveDrink(restaurant_name, foodMenu, price, description, req.file.firebaseUrl)
     } else {
@@ -61,12 +42,40 @@ route.post('/addFood', Multer.single('image'), uploadImage, async function(req, 
     }
 
 
-    res.redirect('reserve')
+    res.redirect('menu')
 })
-route.get('/abc', async function(req, res) {
-    var foods = restaurantService.getMenu("Mikas Burger", "pasta")
-    console.log("************************************************")
-    console.log((await foods).length)
+route.get('/menu', async function(req, res) {
+    var foods = await restaurantService.getMenu()
+    res.render('menu', {
+        foods: foods
+    })
 })
+
+route.post('/changeStatus', function(req, res) {
+
+    if (req.body.foodStatus) {
+        restaurantService.changeStatus('wubet', req.body.foodName, 'foods', false);
+    } else {
+        restaurantService.changeStatus('wubet', req.body.foodName, 'foods', true);
+    }
+    res.redirect('/menu')
+
+})
+
+route.post('/changeRecordStatus', function(req, res) {
+    restaurantService.changeRecordStatus('wubet', req.body.foodName, 'foods', false)
+    res.redirect('/menu')
+
+})
+
+route.post('/updateFood', async function(req, res) {
+    var food = await restaurantService.getFoodByFoodName(req.body.foodName)
+    console.log(food)
+
+    res.render('updateMenu.pug', {
+        food: food
+    })
+})
+
 
 module.exports = route

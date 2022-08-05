@@ -1,6 +1,6 @@
 const express = require('express')
 const route = express.Router()
-const { db, uploadImage } = require('../firebase')
+const { db, uploadImage } = require('../config/firebase')
 const multer = require('multer');
 
 const Multer = multer({

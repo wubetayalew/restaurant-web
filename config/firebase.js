@@ -2,7 +2,7 @@ const { initializeApp, cert } = require('firebase-admin/app')
 const { getFirestore } = require('firebase-admin/firestore')
 var admin = require('firebase-admin');
 
-const serviceAccount = require('./creds.json')
+const serviceAccount = require('../config/creds.json')
 const BUCKET = "restaurants-a2605.appspot.com"
 
 admin.initializeApp({
