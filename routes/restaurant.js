@@ -55,6 +55,9 @@ route.post('/addFood', Multer.single('image'), uploadImage, async function(req, 
 })
 route.get('/menu', async function(req, res) {
     var foods = await restaurantService.getMenu()
+    var restaurants = await restaurantService.getRestaurants();
+    console.log('################################################');
+    console.log(restaurants);
     res.render('menu', {
         foods: foods
     })

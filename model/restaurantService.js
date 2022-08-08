@@ -69,6 +69,14 @@ async function getFoodByFoodName(food_name) {
     const list = await docRef.get();
     return list.data();
 }
+async function getRestaurants() {
+    const list = await db.listCollections();
+    var records = [];
+    list.forEach(record => {
+        records.push(record["_queryOptions"].collectionId);
+    })
+    return records;
+}
 
 module.exports = {
     saveMenu,
@@ -78,5 +86,6 @@ module.exports = {
     getMenu,
     changeStatus,
     changeRecordStatus,
-    getFoodByFoodName
+    getFoodByFoodName,
+    getRestaurants
 }
