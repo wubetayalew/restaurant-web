@@ -1,8 +1,10 @@
 const express = require('express')
 
+
 const route = express.Router()
 const restaurantService = require('../model/restaurantService')
 const { db, uploadImage } = require('../config/firebase')
+
 const multer = require('multer');
 
 const Multer = multer({
@@ -12,7 +14,7 @@ const Multer = multer({
 
 
 route.get('/', async function(req, res) {
-    res.send('you can do this')
+    res.render('index')
 
 })
 route.get('/addFood', function(req, res) {
@@ -24,9 +26,16 @@ route.get('/orders', function(req, res) {
 route.get('/reserve', function(req, res) {
     res.render('reserve')
 })
+route.get('/users', function(req, res) {
+    res.render('users')
+})
 
 route.get('/index', function(req, res) {
     res.render('index')
+})
+
+route.get('/restaurant', function(req, res) {
+    res.render('restaurant')
 })
 route.post('/addFood', Multer.single('image'), uploadImage, async function(req, res) {
     var foodMenu = req.body.foodname;
@@ -76,6 +85,33 @@ route.post('/updateFood', async function(req, res) {
         food: food
     })
 })
+route.get('/about', async function(req, res) {                                                                                                                                                                                                                                   
+    const aboutus= await db.collection('birhan').get()
+    const {docs}=aboutus
+    const about = docs.map(review=>(review.id , review.data()))
+    console.log(about);
+    
 
+    res.render('about',{
+        about: about,
+        title: "Restaurant Orders"
+    })
+       
+})
+
+route.get('/orders', async (req, res) => {   
+    const totOrders= await db.collection('birhan').doc("orders").collection('orders').get()
+    const {docs}=totOrders
+    const order = docs.map(orders=>(orders.id , orders.data()))
+    console.log(order);
+    
+
+    res.render('orders',{
+        order: order,
+        title: "Restaurant Orders"
+    })
+
+     
+})
 
 module.exports = route
