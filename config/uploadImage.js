@@ -1,17 +1,6 @@
-const { initializeApp, cert } = require('firebase-admin/app')
-const { getFirestore } = require('firebase-admin/firestore')
 var admin = require('firebase-admin');
-
-const serviceAccount = require('../config/creds.json')
+const { app } = require('../config/initalizeApp')
 const BUCKET = "restaurants-a2605.appspot.com"
-
-admin.initializeApp({
-    credential: cert(serviceAccount),
-    storageBucket: BUCKET,
-
-})
-
-// const bucket = admin.storage().bucket();
 const bucket = admin.storage().bucket()
 const uploadImage = (req, res, next) => {
     if (!req.file) return next();
@@ -44,11 +33,4 @@ const uploadImage = (req, res, next) => {
 
     stream.end(image.buffer)
 }
-
-const db = getFirestore()
-
-
-
-
-
-module.exports = { db, uploadImage }
+module.exports = { uploadImage }

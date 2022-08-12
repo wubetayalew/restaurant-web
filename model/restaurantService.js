@@ -1,10 +1,24 @@
-const { db } = require('../config/firebase')
-async function createRestaurant(restaurant_name, restaurant_location, restaurant_description) {
-    const restaurantRef = db.collection('restaurant').doc(restaurant_name)
+const { db } = require('../config/database')
+async function createRestaurant(restaurant_name, owner_id) {
+    const restaurantRef = db.collection(restaurant_name).doc('menu');
     await restaurantRef.set({
-        ['restaurant_name']: restaurant_name,
-        ['location']: restaurant_description,
-        ['description']: restaurant_location,
+        ['owner_id']: owner_id,
+    }, { merge: true })
+}
+async function createRestaurantAdmin(restaurant_Admin_id, restaurant_Admin_name, restaurant_name) {
+    const adminRef = db.collection("user").doc(restaurant_Admin_id)
+    await adminRef.set({
+        ['restaurant']: restaurant_name,
+        ['name']: restaurant_Admin_name,
+        ['role']: "restaurant_owner",
+    }, { merge: true })
+}
+async function createAdmin(admin_id, admin_name, admin_phone_number) {
+    const adminRef = db.collection("user").doc(admin_id)
+    await adminRef.set({
+        ['name']: admin_name,
+        ['admin_phone_number']: admin_phone_number,
+        ['role']: "admin",
     }, { merge: true })
 }
 async function saveMenu(restaurant_name, food_name, food_price, food_description, image_location, food_type) {
@@ -54,8 +68,8 @@ async function changeRecordStatus(restaurant_name, item_name, foods_or_drinks, i
 async function deleteMenu(restaurant_name, food_name) {
     db.collection('restaurant').doc(restaurant_name).collection('menu').doc(food_name).delete();
 }
-async function getMenu() {
-    const docRef = db.collection('wubet').doc('menu').collection('foods').where('item_record_status', "!=", false);
+async function getMenu(restaurant_name) {
+    const docRef = db.collection(restaurant_name).doc('menu').collection('foods').where('item_record_status', "!=", false);
     const list = await docRef.get();
     var records = [];
     list.forEach(record => {
@@ -78,6 +92,23 @@ async function getRestaurants() {
     return records;
 }
 
+async function getRestaurantNameFromUid(uid) {
+    const docRef = db.collection('user').doc(uid);
+    const list = await docRef.get();
+    return list.data().restaurant;
+}
+async function getUidFromRestaurantName(restaurant_name) {
+    const docRef = db.collection(restaurant_name).doc("menu");
+    const list = await docRef.get();
+    return list.data().owner_id;
+}
+async function getRoleFromUid(uid) {
+    const docRef = db.collection('user').doc(uid);
+    const list = await docRef.get();
+    return list.data().role;
+}
+
+
 module.exports = {
     saveMenu,
     saveDrink,
@@ -87,5 +118,10 @@ module.exports = {
     changeStatus,
     changeRecordStatus,
     getFoodByFoodName,
-    getRestaurants
+    getRestaurants,
+    createRestaurantAdmin,
+    getRestaurantNameFromUid,
+    getUidFromRestaurantName,
+    createAdmin,
+    getRoleFromUid
 }
