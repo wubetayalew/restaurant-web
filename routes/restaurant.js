@@ -23,9 +23,7 @@ route.get('/addFood', function(req, res) {
 route.get('/addFood', function(req, res) {
     res.render('addmenu')
 })
-route.get('/Specialreserve', function(req, res) {
-    res.render('reserveWithOrder')
-})
+
 
 route.get('/reserve', function(req, res) {
     res.render('reserve')
@@ -117,18 +115,19 @@ route.get('/orders', async function (req, res) {
 
      
 })
-route.get('/orders', async function(req, res) {                                                                                                                                                                                                                                   
-    const totOrders= await db.collection('birhan').doc("orders").collection('orders').get()
-    const {docs}=totOrders
-    const order = docs.map(orders=>(orders.id , orders.data()))
-    console.log(order);
-    
 
-    res.render('orders',{
-        about: about,
-        title: "Restaurant Orders"
+route.get('/Specialreserve', async function(req, res) {
+       const totReserve= await db.collection('birhan').doc('reserve').collection('reserves').get()
+       const {docs} =totReserve
+       const reserveonly=docs.map(reserveonly=>(reserveonly.id,reserveonly.data()))
+       console.log(reserveonly);
+
+       res.render('reserveWithOrder',{
+          reserveonly: reserveonly
+
+       })
     })
        
-})
+
 
 module.exports = route

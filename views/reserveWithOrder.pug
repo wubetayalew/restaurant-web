@@ -97,7 +97,7 @@ include ./includes/nav.pug
       //  Orders 
       .orders
         .row
-          .col-xl-8
+          .col-xl-12
             .card
               .card-body
                 h4.box-title Reservation with orders
@@ -107,88 +107,34 @@ include ./includes/nav.pug
                     thead
                       tr
                         th.serial #
-                        th.avatar Avatar
-                        th Type
-                        th Name
+                        th Id
+                        th Product
+                        th Price
                         th Seats
                         th Date
-                        th Time
+                        th Time From
+                        th Time To
+                        th Status
                     tbody
+                    each item in reserveonly
                       tr
                         td.serial 1.
-                        td.avatar
-                          .round-img
-                            a(href="#")
-                              img.rounded-circle(src="images/avatar/1.jpg", alt)
                         td #5469
                         td
-                          span.name Louis Stanley
+                          span.name= item.menu_item
                         td
-                          span.count 5
+                          span.count= item.price
                         td
-                          span.product 1/2/2002
+                          span.count= item.seats
                         td
-                          span.product 2:00
-                      tr
-                        td.serial 2.
-                        td.avatar
-                          .round-img
-                            a(href="#")
-                              img.rounded-circle(src="images/avatar/2.jpg", alt)
-                        td #5468
+                          span.product= item.date
                         td
-                          span.name Gregory Dixon
+                          span.product= item.timefrom
                         td
-                          span.count 5
+                          span.product= item.timeto
                         td
-                          span.product 1/2/2002
-                        td
-                          span.product 2:00
-                      tr
-                        td.serial 3.
-                        td.avatar
-                          .round-img
-                            a(href="#")
-                              img.rounded-circle(src="images/avatar/3.jpg", alt)
-                        td #5467
-                        td
-                          span.name Catherine Dixon
-                        td
-                          span.count 5
-                        td
-                          span.product 1/2/2002
-                        td
-                          span.product 2:00
-                      tr
-                        td.serial 4.
-                        td.avatar
-                          .round-img
-                            a(href="#")
-                              img.rounded-circle(src="images/avatar/4.jpg", alt)
-                        td #5466
-                        td
-                          span.name Mary Silva
-                        td
-                          span.count 5
-                        td
-                          span.product 1/2/2002
-                        td
-                          span.product 2:00
-                      tr.pb-0
-                        td.serial 5.
-                        td.avatar.pb-0
-                          .round-img
-                            a(href="#")
-                              img.rounded-circle(src="images/avatar/6.jpg", alt)
-                        td #5465
-                        td
-                          span.name Johnny Stephens
-                        td
-                          span.count 5
-                        td
-                          span.product 1/2/2002
-                        td
-                          span.product 2:00
+                          span.badge.badge-complete Complete
+                      
                       
  
 .clearfix
