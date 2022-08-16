@@ -20,6 +20,12 @@ route.get('/', async function(req, res) {
 route.get('/addFood', function(req, res) {
     res.render('addmenu')
 })
+route.get('/addFood', function(req, res) {
+    res.render('addmenu')
+})
+route.get('/Specialreserve', function(req, res) {
+    res.render('reserveWithOrder')
+})
 
 route.get('/reserve', function(req, res) {
     res.render('reserve')
